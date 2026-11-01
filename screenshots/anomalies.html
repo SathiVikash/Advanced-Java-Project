@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Anomaly Center — SupplyChain Traceability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0d0d1a; color: #e2e8f0; min-height: 100vh; }
+        .container { max-width: 1060px; margin: 0 auto; padding: 36px 24px; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 20px; display: inline-block; }
+        .page-title { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .page-subtitle { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 28px; }
+        .summary-bar { display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
+        .summary-chip {
+            padding: 10px 20px; border-radius: 10px;
+            font-size: 13px; font-weight: 600;
+        }
+        .summary-chip.total { background: rgba(102,126,234,0.15); color: #a5b4fc; }
+        .summary-chip.critical { background: rgba(239,68,68,0.15); color: #fca5a5; }
+        .anomaly-table {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; overflow: hidden;
+        }
+        .anomaly-table table { width: 100%; border-collapse: collapse; }
+        .anomaly-table th {
+            padding: 14px 20px; text-align: left;
+            font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4);
+            text-transform: uppercase; letter-spacing: 0.8px;
+            background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .anomaly-table td { padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; vertical-align: middle; }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .badge.CRITICAL { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+        .badge.HIGH { background: rgba(245,158,11,0.2); color: #fcd34d; border: 1px solid rgba(245,158,11,0.3); }
+        .type-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); white-space: nowrap; }
+        .resolve-btn {
+            padding: 7px 16px; border-radius: 6px;
+            background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac; font-size: 12px; font-weight: 500; cursor: pointer;
+            white-space: nowrap;
+        }
+        .product-link { color: #818cf8; text-decoration: none; font-family: monospace; font-size: 13px; font-weight: 600; }
+        .desc-text { color: rgba(255,255,255,0.7); line-height: 1.5; max-width: 440px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" class="back-link">← Back to Dashboard</a>
+        <div class="page-title">⚠️ Anomaly Center (Auditor Console)</div>
+        <div class="page-subtitle">Real-time heuristic evaluation of cold-chain breaches and state violations</div>
+
+        <div class="summary-bar">
+            <div class="summary-chip total">📋 3 Open Anomalies</div>
+            <div class="summary-chip critical">🚨 2 Critical Incidents</div>
+        </div>
+
+        <div class="anomaly-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Type</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Detected At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge CRITICAL">CRITICAL</span></td>
+                        <td><span class="type-badge">TEMP_EXCURSION</span></td>
+                        <td>
+                            <a href="#" class="product-link">PROD-7A9B2C14</a><br>
+                            <span style="font-size:12px;color:rgba(255,255,255,0.5);">Covaxin Lot-X</span>
+                        </td>
+                        <td class="desc-text">Temperature breached upper threshold to <strong>14.2°C</strong> on transit route NH-48 (defined safe limit: <strong>2.0°C–8.0°C</strong>). Active thermal protection failure.</td>
+                        <td style="color:rgba(255,255,255,0.45);white-space:nowrap;font-size:12px;">29 Oct 2026, 11:20</td>
+                        <td><button type="button" class="resolve-btn">✓ Resolve</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge CRITICAL">CRITICAL</span></td>
+                        <td><span class="type-badge">INTEGRITY_TAMPERED</span></td>
+                        <td>
+                            <a href="#" class="product-link">PROD-9E3D10A2</a><br>
+                            <span style="font-size:12px;color:rgba(255,255,255,0.5);">Insulin Glargine 100U/mL</span>
+                        </td>
+                        <td class="desc-text">Cryptographic SHA-256 state mismatch. Local database event payload hash deviates from root hash anchored on <strong>Ethereum Sepolia</strong> block #6841920.</td>
+                        <td style="color:rgba(255,255,255,0.45);white-space:nowrap;font-size:12px;">29 Oct 2026, 08:45</td>
+                        <td><button type="button" class="resolve-btn">✓ Resolve</button></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge HIGH">HIGH</span></td>
+                        <td><span class="type-badge">IMPOSSIBLE_SPEED</span></td>
+                        <td>
+                            <a href="#" class="product-link">PROD-4B8C19F0</a><br>
+                            <span style="font-size:12px;color:rgba(255,255,255,0.5);">Diagnostic Rapid Kits</span>
+                        </td>
+                        <td class="desc-text">Logistics handover between Chennai and Bangalore logged within <strong>22 minutes</strong> (distance: 180 km). Implied speed of <strong>490.9 km/h</strong> violates physical road velocity constraint (&gt;120 km/h).</td>
+                        <td style="color:rgba(255,255,255,0.45);white-space:nowrap;font-size:12px;">28 Oct 2026, 19:10</td>
+                        <td><button type="button" class="resolve-btn">✓ Resolve</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

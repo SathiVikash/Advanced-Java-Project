@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Integrity — SupplyChain Traceability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #0d0d1a; color: #e2e8f0; min-height: 100vh; }
+        .container { max-width: 820px; margin: 0 auto; padding: 36px 24px; }
+        .back-link { color: #667eea; text-decoration: none; font-size: 13px; margin-bottom: 20px; display: inline-block; }
+        .page-title { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .page-subtitle { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 28px; }
+
+        /* SEARCH */
+        .search-bar { display: flex; gap: 12px; margin-bottom: 28px; }
+        .search-bar input {
+            flex: 1; padding: 13px 16px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px; color: #fff; font-size: 14px; font-family: 'Inter', sans-serif;
+        }
+        .search-bar button {
+            padding: 13px 24px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border: none; border-radius: 10px; color: #fff;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+        }
+
+        /* RESULT CARD */
+        .result-card {
+            border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+            border-width: 1px; border-style: solid;
+        }
+        .result-card.tampered { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.4); }
+        .result-icon { font-size: 44px; margin-bottom: 12px; }
+        .result-message { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #fca5a5; }
+        .result-stats { display: flex; gap: 32px; margin-top: 18px; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+
+        /* EVENT LIST */
+        .event-card {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(34,197,94,0.2);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 12px;
+            display: flex; justify-content: space-between; align-items: flex-start;
+        }
+        .event-card.tampered { border-color: rgba(239,68,68,0.45); background: rgba(239,68,68,0.06); }
+        .event-stage { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 5px; }
+        .event-hash { font-family: monospace; font-size: 11px; color: #a5b4fc; word-break: break-all; }
+        .event-card.tampered .event-hash { color: #fca5a5; font-weight: 600; }
+        .badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+        .badge.VERIFIED { background: rgba(34,197,94,0.2); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+        .badge.TAMPERED { background: rgba(239,68,68,0.25); color: #fca5a5; border: 1px solid rgba(239,68,68,0.4); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" class="back-link">← Back to Dashboard</a>
+        <div class="page-title">🔐 Integrity Verification (Audit Check)</div>
+        <div class="page-subtitle">Zero-trust cryptographic verification of local records against Ethereum Sepolia</div>
+
+        <div class="search-bar">
+            <input type="text" value="PROD-9E3D10A2" readonly>
+            <button type="button">🔐 Verify Now</button>
+        </div>
+
+        <!-- RESULT CARD -->
+        <div class="result-card tampered">
+            <div class="result-icon">🚨</div>
+            <div class="result-message">⚠ INTEGRITY BREACH — Off-chain data has been altered. On-chain hashes do NOT match.</div>
+            <div style="color:rgba(255,255,255,0.65);font-size:13px;">
+                Product: <strong style="color:#fff;">Insulin Glargine 100U/mL</strong> (PROD-9E3D10A2)
+            </div>
+            <div class="result-stats">
+                <div class="stat">
+                    <div class="stat-value">3</div>
+                    <div class="stat-label">Total Events</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" style="color:#86efac;">2</div>
+                    <div class="stat-label">Verified</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" style="color:#fca5a5;">1</div>
+                    <div class="stat-label">Tampered (Flagged)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EVENT INTEGRITY LIST -->
+        <h3 style="font-size:15px;font-weight:600;color:#fff;margin-bottom:14px;">Event Integrity Details</h3>
+        
+        <div class="event-card tampered">
+            <div style="flex:1;">
+                <div class="event-stage" style="color:#fca5a5;">WAREHOUSE_RECEIVED ⚠️</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:6px;">
+                    📍 Storage Bay X (Tampered Payload) | 👤 Malicious Actor | ⚠️ Digest Discrepancy
+                </div>
+                <div class="event-hash">LOCAL RE-HASH: 0a93b482e912cf014b2d5a3e10fa789c42b01249b5678129034afb19324058dc<br>
+                ON-CHAIN ROOT: 8f44f2fe2fe54cebbea01b5f6dfc5dbe9120bfc5ae3d44be92ab24f06217217e</div>
+            </div>
+            <span class="badge TAMPERED">TAMPERED</span>
+        </div>
+
+        <div class="event-card">
+            <div style="flex:1;">
+                <div class="event-stage">IN_TRANSIT</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:6px;">
+                    📍 Cargo Express Bay 2, Pune | 👤 Priya Sharma
+                </div>
+                <div class="event-hash">SHA-256: f10238112a0948fb8bd2b2469025ef3ccc4645f501e4428c86f518e0e092794f</div>
+            </div>
+            <span class="badge VERIFIED">VERIFIED</span>
+        </div>
+
+        <div class="event-card">
+            <div style="flex:1;">
+                <div class="event-stage">MANUFACTURED</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:6px;">
+                    📍 Factory 1, Chennai | 👤 Arvind Kumar
+                </div>
+                <div class="event-hash">SHA-256: 4d19ea7768644be9b0b11a1011d6b3a43f66eb583dee4021b11886e8cdb4372f</div>
+            </div>
+            <span class="badge VERIFIED">VERIFIED</span>
+        </div>
+    </div>
+</body>
+</html>

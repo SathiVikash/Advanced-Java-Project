@@ -92,3 +92,4 @@ Access the application in your browser:
 - `/verify?productId=...` — Cryptographic hash vs. blockchain integrity audit
 - `/anomalies` — Anomaly detection and violation management (Auditor)
 - `/h2-console` — Embedded database explorer (JDBC URL: `jdbc:h2:mem:supply_chain_db`)
+
